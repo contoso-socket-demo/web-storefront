@@ -1,0 +1,27 @@
+# Keeps the campaign detection fresh. The badge is computed against the
+# CURRENT head SBOM of the default branch, so the repo needs a live head
+# scan. Push to the default branch is the only event trigger.
+name: socket-heartbeat
+on:
+  schedule:
+    - cron: '52 */4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: socket-heartbeat
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.DEMO_PUSH_TOKEN || github.token }}
+      - run: |
+          set -euo pipefail
+          git config user.name  "contoso-ci"
+          git config user.email "ci@contoso-eng.invalid"
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .socket-heartbeat
+          git add .socket-heartbeat
+          git commit -m "chore: scan heartbeat $(date -u +%H:%M)"
+          git push origin HEAD:main

@@ -1,0 +1,26 @@
+{
+  "name": "web-storefront",
+  "version": "3.1.0",
+  "private": true,
+  "description": "Contoso customer-facing storefront",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "3.5.13",
+    "pinia": "2.3.0",
+    "tailwindcss": "3.4.17",
+    "tailwindcss-contact-forms": "0.5.6",
+    "tailwind-form-kit": "0.6.4",
+    "@antv/f2-vue": "4.1.33",
+    "hardhat-base": "2.2.2",
+    "pinochiomathm": "2.3.5",
+    "bpm-foundation-app-configs": "35.9.4"
+  },
+  "devDependencies": {
+    "vite": "6.0.7",
+    "@servicetitan/eslint-config": "38.1.6"
+  }
+}
